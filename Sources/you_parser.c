@@ -10,8 +10,8 @@
 
 
 #include "you_parser.h"
-#include "http_connection.h"
-#include "http_parser.h"
+#include "../http-server/http_connection.h"
+#include "../http-server/http-parser/http_parser.h"
 #include <stdlib.h>
 #include <pthread.h>
 #include <Python/Python.h>
@@ -65,7 +65,8 @@ static void* python_script_thread(void* params) {
 static void run_python_script(you_parser_struct *you_parser) {
     pthread_t tid;
     pthread_create(&tid, NULL, python_script_thread, (void*)you_parser);
-    you_parser->complete(you_parser->parser_port);
+    if (you_parser->complete)
+        you_parser->complete(you_parser->parser_port);
 }
 
 

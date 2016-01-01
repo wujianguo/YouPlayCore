@@ -9,7 +9,7 @@
 #ifndef you_parser_h
 #define you_parser_h
 
-#include "http_connection.h"
+#include "../http-server/http_connection.h"
 
 typedef void (*you_parser_ready_cb)(int port);
 

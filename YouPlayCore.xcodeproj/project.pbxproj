@@ -19,7 +19,7 @@
 		812E2A6A1C3683B40007F852 /* libYouPlayCore-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A3C1C3681070007F852 /* libYouPlayCore-Mac.a */; };
 		812E2A851C36841F0007F852 /* libhttp-server-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A801C3684090007F852 /* libhttp-server-mac.a */; };
 		812E2A881C36842B0007F852 /* libhttp-server-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A821C3684090007F852 /* libhttp-server-ios.a */; };
-		812E2A8A1C36843E0007F852 /* libpython.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A891C36843E0007F852 /* libpython.tbd */; };
+		812E2A8E1C368DA10007F852 /* libpython.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A891C36843E0007F852 /* libpython.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				812E2A8E1C368DA10007F852 /* libpython.tbd in Frameworks */,
 				812E2A6A1C3683B40007F852 /* libYouPlayCore-Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				812E2A8A1C36843E0007F852 /* libpython.tbd in Frameworks */,
 				812E2A851C36841F0007F852 /* libhttp-server-mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/ $(PROJECT_DIR)/../http-server/libuv/include $(PROJECT_DIR)/../http-server/http-parser";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/";
 			};
 			name = Debug;
 		};
@@ -467,7 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/ $(PROJECT_DIR)/../http-server/libuv/include $(PROJECT_DIR)/../http-server/http-parser";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/";
 			};
 			name = Release;
 		};
@@ -476,7 +476,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/ $(PROJECT_DIR)/../http-server/libuv/include $(PROJECT_DIR)/../http-server/http-parser";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/";
 			};
 			name = Debug;
 		};
@@ -485,7 +485,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/ $(PROJECT_DIR)/../http-server/libuv/include $(PROJECT_DIR)/../http-server/http-parser";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../http-server/";
 			};
 			name = Release;
 		};

@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
     uv_timer_init(uv_default_loop(), &timer_handle);
     uv_timer_start(&timer_handle, on_timer_expire, 1000, 0);
     
-//    start_you_parser(uv_default_loop(), "", 9809, NULL);
+    start_you_parser(uv_default_loop(), "http://wujianguo.org/you_parser.py", 9809, NULL);
     
     return http_server_run(&config, uv_default_loop());
 }

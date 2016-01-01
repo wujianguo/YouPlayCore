@@ -68,6 +68,7 @@ static void run_python_script(you_parser_struct *you_parser) {
 
 
 static void on_connect(http_connection *conn, void *user_data) {
+    YOU_LOG_DEBUG("");
     you_parser_struct *y = (you_parser_struct*)user_data;
     
     const char format[] = "GET %s HTTP/1.1\r\n"
@@ -81,10 +82,10 @@ static void on_connect(http_connection *conn, void *user_data) {
     "\r\n";
     
     char host[MAX_HOST_LEN] = {0};
-    memcpy(host + y->url.field_data[UF_HOST].off, y->url_buf, y->url.field_data[UF_HOST].len);
+    memcpy(host, y->url_buf + y->url.field_data[UF_HOST].off, y->url.field_data[UF_HOST].len);
     
     char path[MAX_URL_LEN] = {0};
-    memcpy(path + y->url.field_data[UF_PATH].off, y->url_buf, strlen(y->url_buf) - y->url.field_data[UF_PATH].off);
+    memcpy(path, y->url_buf + y->url.field_data[UF_PATH].off, strlen(y->url_buf) - y->url.field_data[UF_PATH].off);
     
     char header[MAX_REQUEST_HEADER_LEN] = {0};
     snprintf(header, MAX_REQUEST_HEADER_LEN, format, path, host);
@@ -92,10 +93,11 @@ static void on_connect(http_connection *conn, void *user_data) {
 }
 
 static void on_send(http_connection *conn, void *user_data) {
-    
+    YOU_LOG_DEBUG("");
 }
 
 static void on_header_complete(http_connection *conn, struct http_header *header, void *user_data) {
+    YOU_LOG_DEBUG("");
     you_parser_struct *y = (you_parser_struct*)user_data;
     y->script = (char*)malloc(header->parser.content_length + 1);
     memset(y->script, 0, header->parser.content_length + 1);
@@ -105,9 +107,11 @@ static void on_body(http_connection *conn, const char *at, size_t length, void *
     you_parser_struct *y = (you_parser_struct*)user_data;
     memcpy(y->script + y->pos, at, length);
     y->pos += length;
+    YOU_LOG_DEBUG("%zu, %zu", length, y->pos);
 }
 
 static void on_message_complete(http_connection *conn, void *user_data) {
+    YOU_LOG_DEBUG("");
     you_parser_struct *y = (you_parser_struct*)user_data;
     YOU_LOG_DEBUG("\n%s", y->script);
     free_http_connection(conn);
@@ -130,14 +134,19 @@ int start_you_parser(uv_loop_t *loop, const char url_buf[MAX_URL_LEN], int parse
     http_parser_parse_url(url_buf, strlen(url_buf), 0, &y->url);
     if (!(y->url.field_set & (1<<UF_HOST))) {
         free(y);
+        YOU_LOG_ERROR("");
         return -1;
+    }
+    
+    if (y->url.port == 0) {
+        y->url.port = 80;
     }
     
     y->parser_port = parser_port;
     y->complete = complete;
 
     char host[MAX_HOST_LEN] = {0};
-    memcpy(host + y->url.field_data[UF_HOST].off, url_buf, y->url.field_data[UF_HOST].len);
+    memcpy(host, url_buf + y->url.field_data[UF_HOST].off, y->url.field_data[UF_HOST].len);
     memcpy(y->url_buf, url_buf, strlen(url_buf));
     http_connection *conn = create_http_connection(loop, settings, y);
     http_connection_connect(conn, host, y->url.port);

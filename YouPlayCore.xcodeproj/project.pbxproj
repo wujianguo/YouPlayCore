@@ -20,6 +20,10 @@
 		812E2A851C36841F0007F852 /* libhttp-server-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A801C3684090007F852 /* libhttp-server-mac.a */; };
 		812E2A881C36842B0007F852 /* libhttp-server-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A821C3684090007F852 /* libhttp-server-ios.a */; };
 		812E2A8E1C368DA10007F852 /* libpython.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 812E2A891C36843E0007F852 /* libpython.tbd */; };
+		812E2A981C36A0630007F852 /* you_play_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A961C36A0630007F852 /* you_play_core.c */; };
+		812E2A991C36A0630007F852 /* you_play_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A961C36A0630007F852 /* you_play_core.c */; };
+		812E2A9A1C36A0630007F852 /* you_play_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 812E2A971C36A0630007F852 /* you_play_core.h */; };
+		812E2A9B1C36A0630007F852 /* you_play_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 812E2A971C36A0630007F852 /* you_play_core.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,8 @@
 		812E2A771C3684090007F852 /* http-server.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "http-server.xcodeproj"; path = "http-server/http-server.xcodeproj"; sourceTree = "<group>"; };
 		812E2A891C36843E0007F852 /* libpython.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libpython.tbd; path = usr/lib/libpython.tbd; sourceTree = SDKROOT; };
 		812E2A8B1C3688BD0007F852 /* you_parser.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = you_parser.py; path = script/you_parser.py; sourceTree = SOURCE_ROOT; };
+		812E2A961C36A0630007F852 /* you_play_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = you_play_core.c; sourceTree = "<group>"; };
+		812E2A971C36A0630007F852 /* you_play_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = you_play_core.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,8 @@
 				812E2A501C3681F30007F852 /* you_parser.h */,
 				812E2A551C36820A0007F852 /* media_handler.c */,
 				812E2A561C36820A0007F852 /* media_handler.h */,
+				812E2A961C36A0630007F852 /* you_play_core.c */,
+				812E2A971C36A0630007F852 /* you_play_core.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				812E2A591C36820A0007F852 /* media_handler.h in Headers */,
+				812E2A9A1C36A0630007F852 /* you_play_core.h in Headers */,
 				812E2A531C3681F30007F852 /* you_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				812E2A5A1C36820A0007F852 /* media_handler.h in Headers */,
+				812E2A9B1C36A0630007F852 /* you_play_core.h in Headers */,
 				812E2A541C3681F30007F852 /* you_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				812E2A511C3681F30007F852 /* you_parser.c in Sources */,
+				812E2A981C36A0630007F852 /* you_play_core.c in Sources */,
 				812E2A571C36820A0007F852 /* media_handler.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				812E2A521C3681F30007F852 /* you_parser.c in Sources */,
+				812E2A991C36A0630007F852 /* you_play_core.c in Sources */,
 				812E2A581C36820A0007F852 /* media_handler.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

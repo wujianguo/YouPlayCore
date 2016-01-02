@@ -11,6 +11,7 @@
 #include <pthread.h>
 #include "../http-server/http_server.h"
 #include "you_parser.h"
+#include "media_handler.h"
 
 typedef struct {
     char parser_script_url[MAX_URL_LEN];
@@ -35,30 +36,6 @@ static you_play_service sv = {0};
     while(0)
 
 
-const static char default_http[] = "HTTP/1.1 200 OK\r\n"
-"Server: YouSir/2\r\n"
-"Content-type: text/plain\r\n"
-"Content-Length: 5\r\n"
-"\r\n"
-"hello";
-
-// /
-static void root_handler_on_header_complete(http_request *req) {
-    
-}
-
-static void root_handler_on_body(http_request *req, const char *at, size_t length) {
-    
-}
-
-static void root_handler_on_message_complete(http_request *req) {
-    http_connection_send(req->conn, default_http, strlen(default_http));
-}
-
-static void root_handler_on_send(http_request *req) {
-    req->complete(req);
-}
-
 
 static void* you_play_service_thread(void* params) {
     http_server_config config;
@@ -69,11 +46,11 @@ static void* you_play_service_thread(void* params) {
     config.idle_timeout = 30*1000;
     
     QUEUE_INIT(&config.handlers);
-    HTTP_SERVER_ADD_HANDLER(&config.handlers, "/", root_handler);
+    HTTP_SERVER_ADD_HANDLER(&config.handlers, "/media", media_handler);
     
     uv_loop_t loop = {0};
     uv_loop_init(&loop);
-    start_you_parser(&loop, sv.parser_script_url, sv.parser_port, NULL);
+    start_you_parser_service(&loop, sv.parser_script_url, sv.parser_port, NULL);
     
     http_server_run(&config, &loop);
 

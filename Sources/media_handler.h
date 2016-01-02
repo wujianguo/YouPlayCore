@@ -9,6 +9,14 @@
 #ifndef media_handler_h
 #define media_handler_h
 
-#include <stdio.h>
+#include "../http-server/http_server.h"
+
+void media_handler_on_header_complete(http_request *req);
+
+void media_handler_on_body(http_request *req, const char *at, size_t length);
+
+void media_handler_on_message_complete(http_request *req);
+
+void media_handler_on_send(http_request *req);
 
 #endif /* media_handler_h */

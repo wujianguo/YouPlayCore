@@ -9,14 +9,15 @@
 #include "you_play_core.h"
 #include <stdlib.h>
 #include <pthread.h>
-#include "../http-server/http_server.h"
 #include "you_parser.h"
 #include "media_handler.h"
+#include "meta_handler.h"
 
 typedef struct {
     char parser_script_url[MAX_URL_LEN];
     unsigned short service_port;
     unsigned short parser_port;
+    uv_loop_t *loop;
 } you_play_service;
 
 static you_play_service sv = {0};
@@ -47,12 +48,18 @@ static void* you_play_service_thread(void* params) {
     
     QUEUE_INIT(&config.handlers);
     HTTP_SERVER_ADD_HANDLER(&config.handlers, "/media", media_handler);
+    HTTP_SERVER_ADD_HANDLER(&config.handlers, "/meta", meta_handler);
     
-    uv_loop_t loop = {0};
-    uv_loop_init(&loop);
-    start_you_parser_service(&loop, sv.parser_script_url, sv.parser_port, NULL);
+    uv_loop_t *loop = sv.loop;
+    if (loop == NULL) {
+        loop = (uv_loop_t*)malloc(sizeof(uv_loop_t));
+        memset(loop, 0, sizeof(uv_loop_t));
+        uv_loop_init(loop);
+    }
+
+//    start_you_parser_service(&loop, sv.parser_script_url, sv.parser_port, NULL);
     
-    http_server_run(&config, &loop);
+    http_server_run(&config, loop);
 
     return NULL;
 }
@@ -71,10 +78,13 @@ void start_you_play_service_in_new_thread(unsigned short service_port,
 
 void start_you_play_service(unsigned short service_port,
                             const char parser_script_url[1024],
-                            unsigned short parser_port)
+                            unsigned short parser_port,
+                            uv_loop_t *loop)
 {
     memcpy(sv.parser_script_url, parser_script_url, strlen(parser_script_url));
     sv.service_port = service_port;
     sv.parser_port = parser_port;
+    sv.loop = loop;
     you_play_service_thread(NULL);
 }
+

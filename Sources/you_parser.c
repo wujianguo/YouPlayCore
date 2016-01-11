@@ -153,3 +153,12 @@ int start_you_parser_service(uv_loop_t *loop, const char url_buf[MAX_URL_LEN], i
     return 0;
 }
 
+const char *parser_service_host() {
+    return "127.0.0.1";
+    return "youplay.leanapp.cn";
+}
+
+unsigned short parser_service_port() {
+    return 8888;
+    return 80;
+}

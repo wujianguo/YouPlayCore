@@ -37,7 +37,7 @@ static void test_json() {
 
 static void on_connect(http_connection *conn, void *user_data) {
 //    http://youplay.avosapps.com/api/v1/videos/aHR0cDovL3R2LnNvaHUuY29tLzIwMTYwMTA2L240MzM1NzYxMTEuc2h0bWw=?quality=highVid
-    const char format[] = "GET /meta?url=aHR0cDovL3R2LnNvaHUuY29tLzIwMTUxMTAzL240MjUxNTgwMDQuc2h0bWw= HTTP/1.1\r\n"
+    const char format[] = "GET /meta?url=aHR0cDovL3R2LnNvaHUuY29tLzIwMTUxMTAzL240MjUxNTgwMDQuc2h0bWw=&meta=1 HTTP/1.1\r\n"
     "Host: 127.0.0.1\r\n"
     "Connection: keep-alive\r\n"
     "Cache-Control: no-cache\r\n"
@@ -74,12 +74,15 @@ static struct http_connection_settings settings = {
     on_send,
     on_header_complete,
     on_body,
-    on_message_complete
+    on_message_complete,
+    NULL,
+    NULL
 };
 
 static void on_timer_expire(uv_timer_t *handle) {
     http_connection *conn = create_http_connection(handle->loop, settings, (void*)1);
     http_connection_connect(conn, "127.0.0.1", 9812);
+//    http://127.0.0.1:9812/meta?url=aHR0cDovL3R2LnNvaHUuY29tLzIwMTUxMTAzL240MjUxNTgwMDQuc2h0bWw=
 }
 
 

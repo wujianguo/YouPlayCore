@@ -123,7 +123,9 @@ static struct http_connection_settings settings = {
     on_send,
     on_header_complete,
     on_body,
-    on_message_complete
+    on_message_complete,
+    NULL,
+    NULL
 };
 
 int start_you_parser_service(uv_loop_t *loop, const char url_buf[MAX_URL_LEN], int parser_port, you_parser_ready_cb complete) {
@@ -154,11 +156,11 @@ int start_you_parser_service(uv_loop_t *loop, const char url_buf[MAX_URL_LEN], i
 }
 
 const char *parser_service_host() {
-    return "127.0.0.1";
+//    return "127.0.0.1";
     return "youplay.leanapp.cn";
 }
 
 unsigned short parser_service_port() {
-    return 8888;
+//    return 8888;
     return 80;
 }

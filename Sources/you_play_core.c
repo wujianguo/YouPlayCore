@@ -12,6 +12,7 @@
 #include "you_parser.h"
 #include "media_handler.h"
 #include "meta_handler.h"
+#include "extractor.h"
 
 typedef struct {
     char parser_script_url[MAX_URL_LEN];
@@ -31,6 +32,7 @@ static you_play_service sv = {0};
         setting.on_body = custom_handler##_on_body;                         \
         setting.on_message_complete = custom_handler##_on_message_complete; \
         setting.on_header_complete = custom_handler##_on_header_complete;   \
+        setting.on_error = custom_handler##_on_error;                       \
         QUEUE_INIT(&setting.node);                                          \
         QUEUE_INSERT_TAIL(queue, &setting.node);                            \
     }                                                                       \
@@ -58,7 +60,6 @@ static void* you_play_service_thread(void* params) {
     }
 
 //    start_you_parser_service(&loop, sv.parser_script_url, sv.parser_port, NULL);
-    
     http_server_run(&config, loop);
 
     return NULL;
@@ -86,5 +87,22 @@ void start_you_play_service(unsigned short service_port,
     sv.parser_port = parser_port;
     sv.loop = loop;
     you_play_service_thread(NULL);
+}
+
+
+int create_download_task(char *url, size_t url_len, enum you_media_quality quality, int *task_id) {
+    return 0;
+}
+
+int resume_download_task(int task_id) {
+    return 0;
+}
+
+int pause_download_task(int task_id) {
+    return 0;
+}
+
+int delete_download_task(int task_id) {
+    return 0;
 }
 

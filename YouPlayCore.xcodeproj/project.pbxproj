@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		811BB1B91C490A480032F75D /* range.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1B71C490A480032F75D /* range.c */; };
+		811BB1BA1C490A480032F75D /* range.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1B71C490A480032F75D /* range.c */; };
+		811BB1BB1C490A480032F75D /* range.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB1B81C490A480032F75D /* range.h */; };
+		811BB1BC1C490A480032F75D /* range.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB1B81C490A480032F75D /* range.h */; };
+		811BB1CE1C4C8E450032F75D /* http_retrieve.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1CC1C4C8E450032F75D /* http_retrieve.c */; };
+		811BB1CF1C4C8E450032F75D /* http_retrieve.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1CC1C4C8E450032F75D /* http_retrieve.c */; };
+		811BB1D01C4C8E450032F75D /* http_retrieve.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB1CD1C4C8E450032F75D /* http_retrieve.h */; };
+		811BB1D11C4C8E450032F75D /* http_retrieve.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB1CD1C4C8E450032F75D /* http_retrieve.h */; };
+		811BB26E1C4E19D20032F75D /* task_manager.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB26C1C4E19D20032F75D /* task_manager.c */; };
+		811BB26F1C4E19D20032F75D /* task_manager.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB26C1C4E19D20032F75D /* task_manager.c */; };
+		811BB2701C4E19D20032F75D /* task_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB26D1C4E19D20032F75D /* task_manager.h */; };
+		811BB2711C4E19D20032F75D /* task_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB26D1C4E19D20032F75D /* task_manager.h */; };
 		812E2A311C367F7E0007F852 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A301C367F7E0007F852 /* main.c */; };
 		812E2A511C3681F30007F852 /* you_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A4F1C3681F30007F852 /* you_parser.c */; };
 		812E2A521C3681F30007F852 /* you_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A4F1C3681F30007F852 /* you_parser.c */; };
@@ -109,6 +121,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		811BB1B71C490A480032F75D /* range.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = range.c; sourceTree = "<group>"; };
+		811BB1B81C490A480032F75D /* range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range.h; sourceTree = "<group>"; };
+		811BB1CC1C4C8E450032F75D /* http_retrieve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_retrieve.c; sourceTree = "<group>"; };
+		811BB1CD1C4C8E450032F75D /* http_retrieve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_retrieve.h; sourceTree = "<group>"; };
+		811BB26C1C4E19D20032F75D /* task_manager.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = task_manager.c; sourceTree = "<group>"; };
+		811BB26D1C4E19D20032F75D /* task_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = task_manager.h; sourceTree = "<group>"; };
 		812E2A2D1C367F7E0007F852 /* YouPlayCore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = YouPlayCore; sourceTree = BUILT_PRODUCTS_DIR; };
 		812E2A301C367F7E0007F852 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		812E2A3C1C3681070007F852 /* libYouPlayCore-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libYouPlayCore-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +235,12 @@
 				8156E5BC1C3E1E9300AEFB26 /* meta_handler.h */,
 				81512ED91C43591700E85562 /* gzip.c */,
 				81512EDA1C43591700E85562 /* gzip.h */,
+				811BB1B71C490A480032F75D /* range.c */,
+				811BB1B81C490A480032F75D /* range.h */,
+				811BB1CC1C4C8E450032F75D /* http_retrieve.c */,
+				811BB1CD1C4C8E450032F75D /* http_retrieve.h */,
+				811BB26C1C4E19D20032F75D /* task_manager.c */,
+				811BB26D1C4E19D20032F75D /* task_manager.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -249,11 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8156E5FA1C3E6B1200AEFB26 /* cdecode.h in Headers */,
+				811BB2701C4E19D20032F75D /* task_manager.h in Headers */,
 				8156E5FE1C3E6B1200AEFB26 /* cencode.h in Headers */,
 				812E2A591C36820A0007F852 /* media_handler.h in Headers */,
+				811BB1D01C4C8E450032F75D /* http_retrieve.h in Headers */,
 				81512EDD1C43591700E85562 /* gzip.h in Headers */,
 				812E2AA11C36D7C30007F852 /* extractor.h in Headers */,
 				812E2A9A1C36A0630007F852 /* you_play_core.h in Headers */,
+				811BB1BB1C490A480032F75D /* range.h in Headers */,
 				812E2A531C3681F30007F852 /* you_parser.h in Headers */,
 				8156E6151C40B22600AEFB26 /* json.h in Headers */,
 				8156E5BF1C3E1E9300AEFB26 /* meta_handler.h in Headers */,
@@ -265,11 +292,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8156E5FB1C3E6B1200AEFB26 /* cdecode.h in Headers */,
+				811BB2711C4E19D20032F75D /* task_manager.h in Headers */,
 				8156E5FF1C3E6B1200AEFB26 /* cencode.h in Headers */,
 				812E2A5A1C36820A0007F852 /* media_handler.h in Headers */,
+				811BB1D11C4C8E450032F75D /* http_retrieve.h in Headers */,
 				81512EDE1C43591700E85562 /* gzip.h in Headers */,
 				812E2AA21C36D7C30007F852 /* extractor.h in Headers */,
 				812E2A9B1C36A0630007F852 /* you_play_core.h in Headers */,
+				811BB1BC1C490A480032F75D /* range.h in Headers */,
 				812E2A541C3681F30007F852 /* you_parser.h in Headers */,
 				8156E6161C40B22600AEFB26 /* json.h in Headers */,
 				8156E5C01C3E1E9300AEFB26 /* meta_handler.h in Headers */,
@@ -415,8 +445,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811BB26E1C4E19D20032F75D /* task_manager.c in Sources */,
 				812E2A9F1C36D7C30007F852 /* extractor.c in Sources */,
+				811BB1B91C490A480032F75D /* range.c in Sources */,
 				8156E6131C40B22600AEFB26 /* json.c in Sources */,
+				811BB1CE1C4C8E450032F75D /* http_retrieve.c in Sources */,
 				81512EDB1C43591700E85562 /* gzip.c in Sources */,
 				812E2A511C3681F30007F852 /* you_parser.c in Sources */,
 				812E2A981C36A0630007F852 /* you_play_core.c in Sources */,
@@ -431,8 +464,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811BB26F1C4E19D20032F75D /* task_manager.c in Sources */,
 				812E2AA01C36D7C30007F852 /* extractor.c in Sources */,
+				811BB1BA1C490A480032F75D /* range.c in Sources */,
 				8156E6141C40B22600AEFB26 /* json.c in Sources */,
+				811BB1CF1C4C8E450032F75D /* http_retrieve.c in Sources */,
 				81512EDC1C43591700E85562 /* gzip.c in Sources */,
 				812E2A521C3681F30007F852 /* you_parser.c in Sources */,
 				812E2A991C36A0630007F852 /* you_play_core.c in Sources */,

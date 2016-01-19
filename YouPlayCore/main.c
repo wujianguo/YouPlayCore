@@ -70,6 +70,7 @@ static void on_message_complete(http_connection *conn, void *user_data) {
 }
 
 static struct http_connection_settings settings = {
+    NULL,
     on_connect,
     on_send,
     on_header_complete,
@@ -79,10 +80,19 @@ static struct http_connection_settings settings = {
     NULL
 };
 
+#include "extractor.h"
+
+
+static void on_extractor_complete(extractor_result *ret, void *user_data) {
+    
+}
+
 static void on_timer_expire(uv_timer_t *handle) {
-    http_connection *conn = create_http_connection(handle->loop, settings, (void*)1);
-    http_connection_connect(conn, "127.0.0.1", 9812);
+//    http_connection *conn = create_http_connection(handle->loop, settings, (void*)1);
+//    http_connection_connect(conn, "127.0.0.1", 9812);
 //    http://127.0.0.1:9812/meta?url=aHR0cDovL3R2LnNvaHUuY29tLzIwMTUxMTAzL240MjUxNTgwMDQuc2h0bWw=
+    
+    execute_extractor(handle->loop, "aHR0cDovL3d3dy5pcWl5aS5jb20vdl8xOXJybDV3c3FrLmh0bWwjdmZybT0yLTMtMC0x", you_media_quality_720p, on_extractor_complete, NULL);
 }
 
 

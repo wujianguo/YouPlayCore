@@ -19,4 +19,6 @@ void media_handler_on_message_complete(http_request *req);
 
 void media_handler_on_send(http_request *req);
 
+void media_handler_on_error(http_request *req, int err_code);
+
 #endif /* media_handler_h */

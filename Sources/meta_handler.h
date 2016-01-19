@@ -20,4 +20,6 @@ void meta_handler_on_message_complete(http_request *req);
 
 void meta_handler_on_send(http_request *req);
 
+void meta_handler_on_error(http_request *req, int err_code);
+
 #endif /* meta_handler_h */

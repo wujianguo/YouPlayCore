@@ -110,6 +110,7 @@ static void on_message_complete(http_connection *conn, void *user_data) {
 }
 
 static struct http_connection_settings settings = {
+    NULL,
     on_connect,
     on_send,
     on_header_complete,
@@ -169,3 +170,8 @@ void meta_handler_on_send(http_request *req) {
     req->complete(req);
     
 }
+
+void meta_handler_on_error(http_request *req, int err_code) {
+    
+}
+

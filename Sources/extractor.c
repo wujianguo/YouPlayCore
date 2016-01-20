@@ -48,6 +48,7 @@ static void parse_response_to_result2(char *buf, size_t len, extractor_result *r
 }
 
 static void parse_response_to_result(char *buf, size_t len, extractor_result *result) {
+    YOU_LOG_DEBUG("extractor_result:%p", result);
     json_value *json_ret = json_parse(buf, len);
     ASSERT(json_ret && json_ret->type == json_object);
     extract_quality_item *quality = (extract_quality_item*)malloc(sizeof(extract_quality_item));
@@ -71,6 +72,7 @@ static void parse_response_to_result(char *buf, size_t len, extractor_result *re
                         json_value *url_value = (json_value*)entry->u.object.values[z].value;
                         ASSERT(url_value->type == json_string);
                         memcpy(clip->url, url_value->u.string.ptr, url_value->u.string.length);
+                        YOU_LOG_DEBUG("%s", clip->url);
                     } else if (strcmp(entry->u.object.values[z].name, "playlist_index")==0) {
                         json_value *index_value = (json_value*)entry->u.object.values[z].value;
                         ASSERT(index_value->type == json_integer);
@@ -135,8 +137,10 @@ extractor_result* find_extract_result(const char url[MAX_URL_LEN]) {
     init_extractor();
     QUEUE *q;
     extractor_result *ret = NULL;
+    YOU_LOG_DEBUG("%s", url);
     QUEUE_FOREACH(q, &g_extractor_cache) {
         ret = QUEUE_DATA(q, extractor_result, node);
+        YOU_LOG_DEBUG("%p, %s", ret, ret->url);
         if (strcmp(url, ret->url) == 0)
             return ret;
     }

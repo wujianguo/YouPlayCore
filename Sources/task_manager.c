@@ -239,3 +239,107 @@ int stop_vod_task(vod_task *task) {
     free_vod_task(task);
     return 0;
 }
+
+
+
+
+#include "task_manager.h"
+#include "media_cache.h"
+#include "dispatch.h"
+#include "dispatch_interface.h"
+
+static QUEUE g_media_task_list = {0};
+
+static int g_media_task_init = 0;
+
+typedef struct {
+    void *user_data;
+    media_task_meta_info_cb meta_cb;
+    QUEUE node;
+} media_task_user;
+
+typedef struct media_task {
+    int reference;
+    char url[MAX_URL_LEN];
+    enum you_media_quality quality;
+    uv_loop_t *loop;
+    void *user_data;
+    int callbacking;
+    int destroy;
+    QUEUE node;
+    
+    QUEUE user;
+    
+    dispatch *dis;
+    media_cache *media;
+} media_task;
+
+static media_task* find_media_task(const char url[MAX_URL_LEN], enum you_media_quality quality) {
+    QUEUE *q;
+    media_task *task = NULL;
+    QUEUE_FOREACH(q, &g_media_task_list) {
+        task = QUEUE_DATA(q, media_task, node);
+        if (task->quality==quality && strcmp(task->url, url)==0)
+            return task;
+    }
+    return NULL;
+}
+
+static void add_media_task_user(media_task *task, media_task_meta_info_cb meta_cb, void *user) {
+    task->reference++;
+    media_task_user *u = (media_task_user*)malloc(sizeof(media_task_user));
+    memset(u, 0, sizeof(media_task_user));
+    u->user_data = user;
+    u->meta_cb = meta_cb;
+    QUEUE_INIT(&u->node);
+    QUEUE_INSERT_TAIL(&task->user, &u->node);
+}
+
+media_task* create_media_task(uv_loop_t *loop,
+                              const char url[MAX_URL_LEN],
+                              const char full_path[MAX_NAME_LEN],
+                              enum you_media_quality quality,
+                              media_task_meta_info_cb meta_cb,
+                              void *user) {
+    if (!g_media_task_init) {
+        g_media_task_init = 1;
+        QUEUE_INIT(&g_media_task_list);
+    }
+    media_task *task = find_media_task(url, quality);
+    if (task) {
+        add_media_task_user(task, meta_cb, user);
+    } else {
+        task = (media_task*)malloc(sizeof(media_task));
+        memset(task, 0, sizeof(media_task));
+        QUEUE_INIT(&task->user);
+        task->loop = loop;
+        strncpy(task->url, url, MAX_URL_LEN);
+        task->quality = quality;
+        add_media_task_user(task, meta_cb, user);
+        
+        task->media = open_media_cache(loop, full_path, url, task);
+        struct dispatch_interface interface = {media_cache_set_clips_num, media_cache_set_filesize, media_cache_write_data, media_cache_undownload_range_queue};
+        create_dispatch(loop, url, quality, task->media, interface);
+    }
+    return task;
+}
+
+int media_task_read_data(media_task *task, int index, range rg, media_task_read_cb read_cb, void *user) {
+    ASSERT(g_media_task_init);
+    return 0;
+}
+
+int media_task_get_clips_num(media_task *task, int *num) {
+    ASSERT(g_media_task_init);
+    return 0;
+}
+
+int media_task_get_meta_info(media_task *task, int index, uint64_t *filesize, double *duration) {
+    ASSERT(g_media_task_init);
+    return 0;
+}
+
+int free_media_task(media_task *task, void *user) {
+    ASSERT(g_media_task_init);
+    return 0;
+}

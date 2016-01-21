@@ -35,7 +35,6 @@ enum you_media_quality {
     you_media_quality_default
 };
 
-
 int create_download_task(char *url, size_t url_len, enum you_media_quality quality, int *task_id);
 
 int resume_download_task(int task_id);

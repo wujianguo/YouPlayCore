@@ -20,6 +20,8 @@ typedef struct {
 typedef struct {
     range rg;
     QUEUE node;
-} range_queue;
+} range_queue_node;
+
+typedef QUEUE range_queue;
 
 #endif /* range_h */

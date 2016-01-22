@@ -1,9 +1,9 @@
 //
-//  pipe.c
+//  ihttp_pipe.c
 //  YouPlayCore
 //
-//  Created by 吴建国 on 16/1/21.
+//  Created by wujianguo on 16/1/21.
 //  Copyright © 2016年 wujianguo. All rights reserved.
 //
 
-#include "pipe.h"
+#include "ihttp_pipe.h"

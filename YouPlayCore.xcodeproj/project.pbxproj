@@ -11,10 +11,6 @@
 		811AE48C1C50759B008A52C3 /* dispatch.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4891C50759B008A52C3 /* dispatch.c */; };
 		811AE48D1C50759B008A52C3 /* dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE48A1C50759B008A52C3 /* dispatch.h */; };
 		811AE48E1C50759B008A52C3 /* dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE48A1C50759B008A52C3 /* dispatch.h */; };
-		811AE4921C5075AA008A52C3 /* http_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4901C5075AA008A52C3 /* http_pipe.c */; };
-		811AE4931C5075AA008A52C3 /* http_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4901C5075AA008A52C3 /* http_pipe.c */; };
-		811AE4941C5075AA008A52C3 /* http_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4911C5075AA008A52C3 /* http_pipe.h */; };
-		811AE4951C5075AA008A52C3 /* http_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4911C5075AA008A52C3 /* http_pipe.h */; };
 		811AE4981C5075C2008A52C3 /* media_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4961C5075C2008A52C3 /* media_cache.c */; };
 		811AE4991C5075C2008A52C3 /* media_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4961C5075C2008A52C3 /* media_cache.c */; };
 		811AE49A1C5075C2008A52C3 /* media_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4971C5075C2008A52C3 /* media_cache.h */; };
@@ -27,14 +23,6 @@
 		811AE4A51C5075DE008A52C3 /* media_file_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4A21C5075DE008A52C3 /* media_file_cache.c */; };
 		811AE4A61C5075DE008A52C3 /* media_file_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4A31C5075DE008A52C3 /* media_file_cache.h */; };
 		811AE4A71C5075DE008A52C3 /* media_file_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4A31C5075DE008A52C3 /* media_file_cache.h */; };
-		811AE4AC1C50818F008A52C3 /* dispatch_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4A91C50818F008A52C3 /* dispatch_interface.h */; };
-		811AE4AD1C50818F008A52C3 /* dispatch_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4A91C50818F008A52C3 /* dispatch_interface.h */; };
-		811AE4B21C50C09A008A52C3 /* media_cache_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4AF1C50C09A008A52C3 /* media_cache_interface.h */; };
-		811AE4B31C50C09A008A52C3 /* media_cache_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4AF1C50C09A008A52C3 /* media_cache_interface.h */; };
-		811AE4B61C50C898008A52C3 /* pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4B41C50C898008A52C3 /* pipe.c */; };
-		811AE4B71C50C898008A52C3 /* pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 811AE4B41C50C898008A52C3 /* pipe.c */; };
-		811AE4B81C50C898008A52C3 /* pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4B51C50C898008A52C3 /* pipe.h */; };
-		811AE4B91C50C898008A52C3 /* pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 811AE4B51C50C898008A52C3 /* pipe.h */; };
 		811BB1B91C490A480032F75D /* range.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1B71C490A480032F75D /* range.c */; };
 		811BB1BA1C490A480032F75D /* range.c in Sources */ = {isa = PBXBuildFile; fileRef = 811BB1B71C490A480032F75D /* range.c */; };
 		811BB1BB1C490A480032F75D /* range.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB1B81C490A480032F75D /* range.h */; };
@@ -68,6 +56,24 @@
 		812E2AA01C36D7C30007F852 /* extractor.c in Sources */ = {isa = PBXBuildFile; fileRef = 812E2A9D1C36D7C30007F852 /* extractor.c */; };
 		812E2AA11C36D7C30007F852 /* extractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 812E2A9E1C36D7C30007F852 /* extractor.h */; };
 		812E2AA21C36D7C30007F852 /* extractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 812E2A9E1C36D7C30007F852 /* extractor.h */; };
+		813ED2D91C5122E1002DA8CF /* ihttp_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2D71C5122E1002DA8CF /* ihttp_pipe.c */; };
+		813ED2DA1C5122E1002DA8CF /* ihttp_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2D71C5122E1002DA8CF /* ihttp_pipe.c */; };
+		813ED2DB1C5122E1002DA8CF /* ihttp_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2D81C5122E1002DA8CF /* ihttp_pipe.h */; };
+		813ED2DC1C5122E1002DA8CF /* ihttp_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2D81C5122E1002DA8CF /* ihttp_pipe.h */; };
+		813ED2DE1C5122F7002DA8CF /* ipipe_struct.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2DD1C5122F7002DA8CF /* ipipe_struct.h */; };
+		813ED2DF1C5122F7002DA8CF /* ipipe_struct.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2DD1C5122F7002DA8CF /* ipipe_struct.h */; };
+		813ED2E51C5262F0002DA8CF /* data_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2E31C5262F0002DA8CF /* data_pipe.c */; };
+		813ED2E61C5262F0002DA8CF /* data_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2E31C5262F0002DA8CF /* data_pipe.c */; };
+		813ED2E71C5262F0002DA8CF /* data_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2E41C5262F0002DA8CF /* data_pipe.h */; };
+		813ED2E81C5262F0002DA8CF /* data_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2E41C5262F0002DA8CF /* data_pipe.h */; };
+		813ED2EC1C52630D002DA8CF /* data_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2EA1C52630D002DA8CF /* data_cache.c */; };
+		813ED2ED1C52630D002DA8CF /* data_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 813ED2EA1C52630D002DA8CF /* data_cache.c */; };
+		813ED2EE1C52630D002DA8CF /* data_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2EB1C52630D002DA8CF /* data_cache.h */; };
+		813ED2EF1C52630D002DA8CF /* data_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2EB1C52630D002DA8CF /* data_cache.h */; };
+		813ED2F41C52644B002DA8CF /* idata_cache_for_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2F31C52644B002DA8CF /* idata_cache_for_pipe.h */; };
+		813ED2F51C52644B002DA8CF /* idata_cache_for_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2F31C52644B002DA8CF /* idata_cache_for_pipe.h */; };
+		813ED2F71C526478002DA8CF /* idata_cache_for_dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2F61C526478002DA8CF /* idata_cache_for_dispatch.h */; };
+		813ED2F81C526478002DA8CF /* idata_cache_for_dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 813ED2F61C526478002DA8CF /* idata_cache_for_dispatch.h */; };
 		81512EDB1C43591700E85562 /* gzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 81512ED91C43591700E85562 /* gzip.c */; };
 		81512EDC1C43591700E85562 /* gzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 81512ED91C43591700E85562 /* gzip.c */; };
 		81512EDD1C43591700E85562 /* gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 81512EDA1C43591700E85562 /* gzip.h */; };
@@ -151,18 +157,12 @@
 /* Begin PBXFileReference section */
 		811AE4891C50759B008A52C3 /* dispatch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dispatch.c; sourceTree = "<group>"; };
 		811AE48A1C50759B008A52C3 /* dispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dispatch.h; sourceTree = "<group>"; };
-		811AE4901C5075AA008A52C3 /* http_pipe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_pipe.c; sourceTree = "<group>"; };
-		811AE4911C5075AA008A52C3 /* http_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_pipe.h; sourceTree = "<group>"; };
 		811AE4961C5075C2008A52C3 /* media_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = media_cache.c; sourceTree = "<group>"; };
 		811AE4971C5075C2008A52C3 /* media_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = media_cache.h; sourceTree = "<group>"; };
 		811AE49C1C5075D2008A52C3 /* media_mem_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = media_mem_cache.c; sourceTree = "<group>"; };
 		811AE49D1C5075D2008A52C3 /* media_mem_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = media_mem_cache.h; sourceTree = "<group>"; };
 		811AE4A21C5075DE008A52C3 /* media_file_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = media_file_cache.c; sourceTree = "<group>"; };
 		811AE4A31C5075DE008A52C3 /* media_file_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = media_file_cache.h; sourceTree = "<group>"; };
-		811AE4A91C50818F008A52C3 /* dispatch_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dispatch_interface.h; sourceTree = "<group>"; };
-		811AE4AF1C50C09A008A52C3 /* media_cache_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = media_cache_interface.h; sourceTree = "<group>"; };
-		811AE4B41C50C898008A52C3 /* pipe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pipe.c; sourceTree = "<group>"; };
-		811AE4B51C50C898008A52C3 /* pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pipe.h; sourceTree = "<group>"; };
 		811BB1B71C490A480032F75D /* range.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = range.c; sourceTree = "<group>"; };
 		811BB1B81C490A480032F75D /* range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = range.h; sourceTree = "<group>"; };
 		811BB1CC1C4C8E450032F75D /* http_retrieve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_retrieve.c; sourceTree = "<group>"; };
@@ -184,6 +184,15 @@
 		812E2A971C36A0630007F852 /* you_play_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = you_play_core.h; sourceTree = "<group>"; };
 		812E2A9D1C36D7C30007F852 /* extractor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extractor.c; sourceTree = "<group>"; };
 		812E2A9E1C36D7C30007F852 /* extractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extractor.h; sourceTree = "<group>"; };
+		813ED2D71C5122E1002DA8CF /* ihttp_pipe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ihttp_pipe.c; sourceTree = "<group>"; };
+		813ED2D81C5122E1002DA8CF /* ihttp_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ihttp_pipe.h; sourceTree = "<group>"; };
+		813ED2DD1C5122F7002DA8CF /* ipipe_struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ipipe_struct.h; sourceTree = "<group>"; };
+		813ED2E31C5262F0002DA8CF /* data_pipe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = data_pipe.c; sourceTree = "<group>"; };
+		813ED2E41C5262F0002DA8CF /* data_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data_pipe.h; sourceTree = "<group>"; };
+		813ED2EA1C52630D002DA8CF /* data_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = data_cache.c; sourceTree = "<group>"; };
+		813ED2EB1C52630D002DA8CF /* data_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data_cache.h; sourceTree = "<group>"; };
+		813ED2F31C52644B002DA8CF /* idata_cache_for_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idata_cache_for_pipe.h; sourceTree = "<group>"; };
+		813ED2F61C526478002DA8CF /* idata_cache_for_dispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idata_cache_for_dispatch.h; sourceTree = "<group>"; };
 		81512ED61C4358EA00E85562 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		81512ED91C43591700E85562 /* gzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzip.c; sourceTree = "<group>"; };
 		81512EDA1C43591700E85562 /* gzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gzip.h; sourceTree = "<group>"; };
@@ -259,6 +268,9 @@
 		812E2A4E1C3681DB0007F852 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				813ED2E91C5262FE002DA8CF /* data_cache */,
+				813ED2CD1C512246002DA8CF /* media_cache */,
+				813ED2CB1C512227002DA8CF /* data_pipe */,
 				8156E6111C40B22600AEFB26 /* json.c */,
 				8156E6121C40B22600AEFB26 /* json.h */,
 				8156E5F41C3E6B1200AEFB26 /* cdecode.c */,
@@ -285,18 +297,7 @@
 				811BB26D1C4E19D20032F75D /* task_manager.h */,
 				811AE4891C50759B008A52C3 /* dispatch.c */,
 				811AE48A1C50759B008A52C3 /* dispatch.h */,
-				811AE4901C5075AA008A52C3 /* http_pipe.c */,
-				811AE4911C5075AA008A52C3 /* http_pipe.h */,
-				811AE4961C5075C2008A52C3 /* media_cache.c */,
-				811AE4971C5075C2008A52C3 /* media_cache.h */,
-				811AE49C1C5075D2008A52C3 /* media_mem_cache.c */,
-				811AE49D1C5075D2008A52C3 /* media_mem_cache.h */,
-				811AE4A21C5075DE008A52C3 /* media_file_cache.c */,
-				811AE4A31C5075DE008A52C3 /* media_file_cache.h */,
-				811AE4A91C50818F008A52C3 /* dispatch_interface.h */,
-				811AE4AF1C50C09A008A52C3 /* media_cache_interface.h */,
-				811AE4B41C50C898008A52C3 /* pipe.c */,
-				811AE4B51C50C898008A52C3 /* pipe.h */,
+				813ED2F61C526478002DA8CF /* idata_cache_for_dispatch.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -321,6 +322,41 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		813ED2CB1C512227002DA8CF /* data_pipe */ = {
+			isa = PBXGroup;
+			children = (
+				813ED2D71C5122E1002DA8CF /* ihttp_pipe.c */,
+				813ED2D81C5122E1002DA8CF /* ihttp_pipe.h */,
+				813ED2DD1C5122F7002DA8CF /* ipipe_struct.h */,
+				813ED2E31C5262F0002DA8CF /* data_pipe.c */,
+				813ED2E41C5262F0002DA8CF /* data_pipe.h */,
+				813ED2F31C52644B002DA8CF /* idata_cache_for_pipe.h */,
+			);
+			name = data_pipe;
+			sourceTree = "<group>";
+		};
+		813ED2CD1C512246002DA8CF /* media_cache */ = {
+			isa = PBXGroup;
+			children = (
+				811AE4961C5075C2008A52C3 /* media_cache.c */,
+				811AE4971C5075C2008A52C3 /* media_cache.h */,
+				811AE49C1C5075D2008A52C3 /* media_mem_cache.c */,
+				811AE49D1C5075D2008A52C3 /* media_mem_cache.h */,
+				811AE4A21C5075DE008A52C3 /* media_file_cache.c */,
+				811AE4A31C5075DE008A52C3 /* media_file_cache.h */,
+			);
+			name = media_cache;
+			sourceTree = "<group>";
+		};
+		813ED2E91C5262FE002DA8CF /* data_cache */ = {
+			isa = PBXGroup;
+			children = (
+				813ED2EA1C52630D002DA8CF /* data_cache.c */,
+				813ED2EB1C52630D002DA8CF /* data_cache.h */,
+			);
+			name = data_cache;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -328,23 +364,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811AE4941C5075AA008A52C3 /* http_pipe.h in Headers */,
 				8156E5FA1C3E6B1200AEFB26 /* cdecode.h in Headers */,
 				811BB2701C4E19D20032F75D /* task_manager.h in Headers */,
 				8156E5FE1C3E6B1200AEFB26 /* cencode.h in Headers */,
-				811AE4AC1C50818F008A52C3 /* dispatch_interface.h in Headers */,
+				813ED2F71C526478002DA8CF /* idata_cache_for_dispatch.h in Headers */,
+				813ED2F41C52644B002DA8CF /* idata_cache_for_pipe.h in Headers */,
 				812E2A591C36820A0007F852 /* media_handler.h in Headers */,
 				811BB1D01C4C8E450032F75D /* http_retrieve.h in Headers */,
 				81512EDD1C43591700E85562 /* gzip.h in Headers */,
-				811AE4B21C50C09A008A52C3 /* media_cache_interface.h in Headers */,
+				813ED2DB1C5122E1002DA8CF /* ihttp_pipe.h in Headers */,
+				813ED2EE1C52630D002DA8CF /* data_cache.h in Headers */,
 				812E2AA11C36D7C30007F852 /* extractor.h in Headers */,
-				811AE4B81C50C898008A52C3 /* pipe.h in Headers */,
 				811AE4A01C5075D2008A52C3 /* media_mem_cache.h in Headers */,
 				811AE4A61C5075DE008A52C3 /* media_file_cache.h in Headers */,
 				811AE48D1C50759B008A52C3 /* dispatch.h in Headers */,
 				812E2A9A1C36A0630007F852 /* you_play_core.h in Headers */,
 				811AE49A1C5075C2008A52C3 /* media_cache.h in Headers */,
+				813ED2DE1C5122F7002DA8CF /* ipipe_struct.h in Headers */,
 				811BB1BB1C490A480032F75D /* range.h in Headers */,
+				813ED2E71C5262F0002DA8CF /* data_pipe.h in Headers */,
 				812E2A531C3681F30007F852 /* you_parser.h in Headers */,
 				8156E6151C40B22600AEFB26 /* json.h in Headers */,
 				8156E5BF1C3E1E9300AEFB26 /* meta_handler.h in Headers */,
@@ -355,23 +393,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811AE4951C5075AA008A52C3 /* http_pipe.h in Headers */,
 				8156E5FB1C3E6B1200AEFB26 /* cdecode.h in Headers */,
 				811BB2711C4E19D20032F75D /* task_manager.h in Headers */,
 				8156E5FF1C3E6B1200AEFB26 /* cencode.h in Headers */,
-				811AE4AD1C50818F008A52C3 /* dispatch_interface.h in Headers */,
+				813ED2F81C526478002DA8CF /* idata_cache_for_dispatch.h in Headers */,
+				813ED2F51C52644B002DA8CF /* idata_cache_for_pipe.h in Headers */,
 				812E2A5A1C36820A0007F852 /* media_handler.h in Headers */,
 				811BB1D11C4C8E450032F75D /* http_retrieve.h in Headers */,
 				81512EDE1C43591700E85562 /* gzip.h in Headers */,
-				811AE4B31C50C09A008A52C3 /* media_cache_interface.h in Headers */,
+				813ED2DC1C5122E1002DA8CF /* ihttp_pipe.h in Headers */,
+				813ED2EF1C52630D002DA8CF /* data_cache.h in Headers */,
 				812E2AA21C36D7C30007F852 /* extractor.h in Headers */,
-				811AE4B91C50C898008A52C3 /* pipe.h in Headers */,
 				811AE4A11C5075D2008A52C3 /* media_mem_cache.h in Headers */,
 				811AE4A71C5075DE008A52C3 /* media_file_cache.h in Headers */,
 				811AE48E1C50759B008A52C3 /* dispatch.h in Headers */,
 				812E2A9B1C36A0630007F852 /* you_play_core.h in Headers */,
 				811AE49B1C5075C2008A52C3 /* media_cache.h in Headers */,
+				813ED2DF1C5122F7002DA8CF /* ipipe_struct.h in Headers */,
 				811BB1BC1C490A480032F75D /* range.h in Headers */,
+				813ED2E81C5262F0002DA8CF /* data_pipe.h in Headers */,
 				812E2A541C3681F30007F852 /* you_parser.h in Headers */,
 				8156E6161C40B22600AEFB26 /* json.h in Headers */,
 				8156E5C01C3E1E9300AEFB26 /* meta_handler.h in Headers */,
@@ -522,15 +562,16 @@
 				812E2A9F1C36D7C30007F852 /* extractor.c in Sources */,
 				811BB1B91C490A480032F75D /* range.c in Sources */,
 				811AE49E1C5075D2008A52C3 /* media_mem_cache.c in Sources */,
-				811AE4921C5075AA008A52C3 /* http_pipe.c in Sources */,
 				8156E6131C40B22600AEFB26 /* json.c in Sources */,
 				811AE48B1C50759B008A52C3 /* dispatch.c in Sources */,
+				813ED2D91C5122E1002DA8CF /* ihttp_pipe.c in Sources */,
+				813ED2EC1C52630D002DA8CF /* data_cache.c in Sources */,
 				811BB1CE1C4C8E450032F75D /* http_retrieve.c in Sources */,
 				81512EDB1C43591700E85562 /* gzip.c in Sources */,
 				812E2A511C3681F30007F852 /* you_parser.c in Sources */,
+				813ED2E51C5262F0002DA8CF /* data_pipe.c in Sources */,
 				812E2A981C36A0630007F852 /* you_play_core.c in Sources */,
 				811AE4981C5075C2008A52C3 /* media_cache.c in Sources */,
-				811AE4B61C50C898008A52C3 /* pipe.c in Sources */,
 				8156E5F81C3E6B1200AEFB26 /* cdecode.c in Sources */,
 				812E2A571C36820A0007F852 /* media_handler.c in Sources */,
 				8156E5FC1C3E6B1200AEFB26 /* cencode.c in Sources */,
@@ -547,15 +588,16 @@
 				812E2AA01C36D7C30007F852 /* extractor.c in Sources */,
 				811BB1BA1C490A480032F75D /* range.c in Sources */,
 				811AE49F1C5075D2008A52C3 /* media_mem_cache.c in Sources */,
-				811AE4931C5075AA008A52C3 /* http_pipe.c in Sources */,
 				8156E6141C40B22600AEFB26 /* json.c in Sources */,
 				811AE48C1C50759B008A52C3 /* dispatch.c in Sources */,
+				813ED2DA1C5122E1002DA8CF /* ihttp_pipe.c in Sources */,
+				813ED2ED1C52630D002DA8CF /* data_cache.c in Sources */,
 				811BB1CF1C4C8E450032F75D /* http_retrieve.c in Sources */,
 				81512EDC1C43591700E85562 /* gzip.c in Sources */,
 				812E2A521C3681F30007F852 /* you_parser.c in Sources */,
+				813ED2E61C5262F0002DA8CF /* data_pipe.c in Sources */,
 				812E2A991C36A0630007F852 /* you_play_core.c in Sources */,
 				811AE4991C5075C2008A52C3 /* media_cache.c in Sources */,
-				811AE4B71C50C898008A52C3 /* pipe.c in Sources */,
 				8156E5F91C3E6B1200AEFB26 /* cdecode.c in Sources */,
 				812E2A581C36820A0007F852 /* media_handler.c in Sources */,
 				8156E5FD1C3E6B1200AEFB26 /* cencode.c in Sources */,

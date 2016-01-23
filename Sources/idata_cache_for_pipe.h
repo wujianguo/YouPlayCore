@@ -10,14 +10,15 @@
 #define idata_cache_for_pipe_h
 
 #include <_types/_uint64_t.h>
-typedef struct range range;
-typedef struct data_cache data_cache;
+#include "range.h"
+
+typedef struct idata_cache idata_cache;
 
 struct idata_cache_interface {
-    void (*set_clips_num)(data_cache *cache, int num);
-    void (*set_filesize)(data_cache *cache, int index, uint64_t filesize);
-    void (*write_data)(data_cache *cache, int index, range rg, char *buf);
-    void (*undownload_range_queue)(data_cache *cache, int index, range_queue *rgq);
+//    int (*set_clips_num)(idata_cache *cache, int num);
+//    int (*undownload_range_queue)(idata_cache *cache, int index, range_queue *rgq);
+    int (*set_filesize)(idata_cache *cache, int index, uint64_t filesize);
+    int (*write_data)(idata_cache *cache, int index, range rg, char *buf);
 };
 
 

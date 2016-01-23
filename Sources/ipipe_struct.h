@@ -9,5 +9,10 @@
 #ifndef ipipe_struct_h
 #define ipipe_struct_h
 
+#include "idata_pipe.h"
+
+typedef struct {
+    int (*destroy)(idata_pipe *pipe);
+}ipipe_interface;
 
 #endif /* ipipe_struct_h */

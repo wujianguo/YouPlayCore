@@ -7,3 +7,8 @@
 //
 
 #include "idata_pipe.h"
+#include "ipipe_struct.h"
+
+int ipipe_destroy(idata_pipe *pipe) {
+    return pipe->interface->destroy(pipe);
+}

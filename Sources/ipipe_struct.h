@@ -15,4 +15,8 @@ typedef struct {
     int (*destroy)(idata_pipe *pipe);
 }ipipe_interface;
 
+typedef struct idata_pipe {
+    ipipe_interface *interface;
+}idata_pipe;
+
 #endif /* ipipe_struct_h */

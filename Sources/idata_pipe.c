@@ -9,6 +9,10 @@
 #include "idata_pipe.h"
 #include "ipipe_struct.h"
 
+int ipipe_update_url(idata_pipe *pipe, const char *url) {
+    return pipe->interface->update_url(pipe, url);
+}
+
 int ipipe_destroy(idata_pipe *pipe) {
     return pipe->interface->destroy(pipe);
 }

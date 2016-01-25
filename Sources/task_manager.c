@@ -244,9 +244,9 @@ int stop_vod_task(vod_task *task) {
 
 
 #include "task_manager.h"
-#include "media_cache.h"
+#include "idata_cache.h"
 #include "dispatch.h"
-#include "dispatch_interface.h"
+#include "idata_cache_for_dispatch.h"
 
 static QUEUE g_media_task_list = {0};
 
@@ -271,7 +271,7 @@ typedef struct media_task {
     QUEUE user;
     
     dispatch *dis;
-    media_cache *media;
+    data_cache *cache;
 } media_task;
 
 static media_task* find_media_task(const char url[MAX_URL_LEN], enum you_media_quality quality) {

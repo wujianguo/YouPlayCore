@@ -12,6 +12,7 @@
 #include "idata_pipe.h"
 
 typedef struct {
+    int (*update_url)(idata_pipe *pipe, const char *url);
     int (*destroy)(idata_pipe *pipe);
 }ipipe_interface;
 

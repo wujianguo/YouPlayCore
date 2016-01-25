@@ -10,11 +10,11 @@
 #define dispatch_h
 
 #include "you_play_core.h"
-#include "dispatch_interface.h"
+#include "idata_cache_for_dispatch.h"
 
 typedef struct dispatch dispatch;
 
-dispatch* create_dispatch(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, media_cache *media, struct dispatch_interface interface);
+dispatch* create_dispatch(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, data_cache *cache, struct idata_cache_interface interface);
 
 int dispatch_priority(dispatch *dis, int index, uint64_t pos);
 

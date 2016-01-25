@@ -35,10 +35,14 @@ typedef struct {
     uv_timer_t timer_handle;
 }extractor_result;
 
+typedef struct extractor extractor;
+
 typedef void (*extractor_complete_cb)(extractor_result *ret, void *user_data);
 
 extractor_result* find_extract_result(const char url[MAX_URL_LEN]);
 
-void execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, extractor_complete_cb complete_cb, void *user_data);
+extractor* execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, extractor_complete_cb complete_cb, void *user_data);
+
+void cancel_extractor(extractor *ex);
 
 #endif /* extractor_h */

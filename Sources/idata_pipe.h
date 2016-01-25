@@ -9,14 +9,14 @@
 #ifndef idata_pipe_h
 #define idata_pipe_h
 
-#include "range.h"
-
 typedef struct idata_pipe idata_pipe;
 
 typedef struct {
     int (*on_error)(idata_pipe *pipe, int err_code, void *user_data);
     int (*on_complete)(idata_pipe *pipe, void *user_data);
 }ipipe_callback;
+
+int ipipe_update_url(idata_pipe *pipe, const char *url);
 
 int ipipe_destroy(idata_pipe *pipe);
 

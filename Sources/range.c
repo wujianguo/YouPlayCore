@@ -7,3 +7,7 @@
 //
 
 #include "range.h"
+
+int is_range1_contains_range2(range rg1, range rg2) {
+    return rg1.pos <= rg2.pos && RANGE_END(rg1) >= RANGE_END(rg2);
+}

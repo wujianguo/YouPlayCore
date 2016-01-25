@@ -13,10 +13,14 @@
 #include "idata_cache_for_pipe.h"
 #include "range.h"
 
-idata_pipe* ihttp_pipe_create(ipipe_callback callback,
-                              struct idata_cache_interface cache_interface,
+typedef struct uv_loop_t uv_loop_t;
+
+idata_pipe* ihttp_pipe_create(uv_loop_t *loop,
+                              ipipe_callback callback,
+                              struct icache_interface_for_pipe cache_interface,
                               idata_cache *cache,
                               const char *url,
+                              int index,
                               range rg,
                               void *user_data);
 

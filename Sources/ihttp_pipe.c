@@ -14,6 +14,25 @@
 
 typedef struct {
     idata_pipe ipipe;
+    ipipe_callback callback;
+    idata_cache *cache;
+    struct icache_interface_for_pipe cache_interface;
+    void *user_data;
+    
+    char url_buf[MAX_URL_LEN];
+    struct http_parser_url url;
+    http_connection *conn;
+
+    range want_rg;
+    uv_loop_t *loop;
+    
+    uint64_t filesize;
+    int index;
+    
+    int callbacking;
+    int destroy;
+    
+    int connecting;
 }ihttp_pipe;
 
 static ihttp_pipe * cast_from_ipipe(idata_pipe * p) {
@@ -28,11 +47,30 @@ static ihttp_pipe * cast_from_void(void * p) {
     return (ihttp_pipe *)p;
 }
 
+static int ihttp_pipe_update_url(idata_pipe *pipe, const char *url) {
+    ihttp_pipe *p = cast_from_ipipe(pipe);
+    if (p->connecting) return 0; // todo: fix it.
+    memset(p->url_buf, 0, MAX_URL_LEN);
+    strncpy(p->url_buf, url, strlen(url));
+    http_parser_url_init(&p->url);
+    http_parser_parse_url(url, strlen(url), 0, &p->url);
+    return 0;
+}
+
 static int ihttp_pipe_destory(idata_pipe *pipe) {
+    ihttp_pipe *p = cast_from_ipipe(pipe);
+    if (p->callbacking) {
+        p->destroy = 1;
+        return 0;
+    }
+    if (p->conn)
+        free_http_connection(p->conn);
+    free(p);
     return 0;
 }
 
 static ipipe_interface g_interface = {
+    ihttp_pipe_update_url,
     ihttp_pipe_destory
 };
 
@@ -43,36 +81,98 @@ static void on_error(ihttp_pipe *pipe) {
 
 
 static void on_remote_error(http_connection *conn, void *user_data, int err_code) {
-    ihttp_pipe *pipe = (ihttp_pipe*)user_data;
+    ihttp_pipe *pipe = cast_from_void(user_data);
     YOU_LOG_DEBUG("http pipe:%p", pipe);
     on_error(pipe);
 }
 
 static void on_remote_connect(http_connection *conn, void *user_data) {
-    ihttp_pipe *pipe = (ihttp_pipe*)user_data;
+    ihttp_pipe *pipe = cast_from_void(user_data);
     YOU_LOG_DEBUG("http pipe:%p", pipe);
+    pipe->connecting = 0;
 
+    char format[MAX_REQUEST_HEADER_LEN] = "GET %s HTTP/1.1\r\n"
+    "Host: %s\r\n"
+    "Connection: keep-alive\r\n"
+    "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n"
+    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
+    "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36\r\n"
+    "Accept-Encoding: gzip, deflate\r\n"
+    "Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4\r\n";
+    
+    if (pipe->want_rg.len==ULLONG_MAX)
+        strcat(format, "Range: bytes=%llu-\r\n\r\n");
+    else
+        strcat(format, "Range: bytes=%llu-%llu\r\n\r\n");
+    
+    char host[MAX_HOST_LEN] = {0};
+    memcpy(host, pipe->url_buf + pipe->url.field_data[UF_HOST].off, pipe->url.field_data[UF_HOST].len);
+    
+    char path[MAX_URL_LEN] = {0};
+    memcpy(path, pipe->url_buf + pipe->url.field_data[UF_PATH].off, strlen(pipe->url_buf) - pipe->url.field_data[UF_PATH].off);
+    
+    char header[MAX_REQUEST_HEADER_LEN] = {0};
+    if (pipe->want_rg.len==ULLONG_MAX)
+        snprintf(header, MAX_REQUEST_HEADER_LEN, format, path, host, pipe->want_rg.pos);
+    else
+        snprintf(header, MAX_REQUEST_HEADER_LEN, format, path, host, pipe->want_rg.pos, pipe->want_rg.len);
+
+    http_connection_send(conn, header, strlen(header));
 }
 
 static void on_remote_send(http_connection *conn, void *user_data) {
     
 }
 
-static void on_remote_header_complete(http_connection *conn, struct http_header *header, void *user_data) {
-    ihttp_pipe *pipe = (ihttp_pipe*)user_data;
-    YOU_LOG_DEBUG("http pipe:%p", pipe);
+static void start_connect_to(uv_loop_t *loop, ihttp_pipe *pipe, const char *url);
 
+static void on_remote_header_complete(http_connection *conn, struct http_header *header, void *user_data) {
+    ihttp_pipe *pipe = cast_from_void(user_data);
+    YOU_LOG_DEBUG("http pipe:%p, content-length:%llu", pipe, header->parser.content_length);
+    if (header->parser.status_code == 302) {
+        QUEUE *q;
+        struct http_header_field_value *head;
+        QUEUE_FOREACH(q, &header->headers) {
+            head = QUEUE_DATA(q, struct http_header_field_value, node);
+            if (strcmp(head->field, "Location") == 0) {
+                start_connect_to(pipe->loop, pipe, head->value);
+            }
+        }
+        free_http_connection(conn);
+        return;
+    }
+    if (header->parser.status_code != 200 || header->parser.status_code != 206) {
+        pipe->callback.on_error(cast_to_ipipe(pipe), header->parser.status_code, pipe->user_data);
+        return;
+    }
+    pipe->filesize = header->parser.content_length;
+    pipe->cache_interface.set_filesize(pipe->cache, pipe->index, header->parser.content_length);
 }
 
 static void on_remote_body(http_connection *conn, const char *at, size_t length, void *user_data) {
-    ihttp_pipe *pipe = (ihttp_pipe*)user_data;
+    ihttp_pipe *pipe = cast_from_void(user_data);
     YOU_LOG_DEBUG("http pipe:%p", pipe);
+    range rg = {pipe->want_rg.pos, (uint64_t)length};
+    pipe->want_rg.pos += length;
+    pipe->want_rg.len -= length;
+
+    pipe->callbacking = 1;
+    pipe->cache_interface.write_data(pipe->cache, pipe->index, rg, at);
+    pipe->callbacking = 0;
+    
+    if (pipe->destroy) {
+        ihttp_pipe_destory(cast_to_ipipe(pipe));
+        return;
+    }
+    
+    if (pipe->want_rg.len == 0)
+        pipe->callback.on_complete(cast_to_ipipe(pipe), pipe->user_data);
 }
 
 static void on_remote_message_complete(http_connection *conn, void *user_data) {
-    ihttp_pipe *pipe = (ihttp_pipe*)user_data;
+    ihttp_pipe *pipe = cast_from_void(user_data);
     YOU_LOG_DEBUG("http pipe:%p", pipe);
-
+    pipe->callback.on_complete(cast_to_ipipe(pipe), pipe->user_data);
 }
 
 static struct http_connection_settings g_http_connection_settings = {
@@ -87,14 +187,47 @@ static struct http_connection_settings g_http_connection_settings = {
 };
 
 
-idata_pipe* ihttp_pipe_create(ipipe_callback callback,
-                              struct idata_cache_interface cache_interface,
+static void start_connect_to(uv_loop_t *loop, ihttp_pipe *pipe, const char *url) {
+    memset(pipe->url_buf, 0, MAX_URL_LEN);
+    strncpy(pipe->url_buf, url, strlen(url));
+    http_parser_url_init(&pipe->url);
+    http_parser_parse_url(url, strlen(url), 0, &pipe->url);
+    
+    ASSERT(pipe->url.field_set & 1<<UF_HOST);
+    
+    if (pipe->url.port == 0)
+        pipe->url.port = 80;
+    
+    char host[MAX_HOST_LEN] = {0};
+    memcpy(host, url + pipe->url.field_data[UF_HOST].off, pipe->url.field_data[UF_HOST].len);
+    memcpy(pipe->url_buf, url, strlen(url));
+    
+    pipe->conn = create_http_connection(loop, g_http_connection_settings, pipe);
+    pipe->connecting = 1;
+    http_connection_connect(pipe->conn, host, pipe->url.port);
+}
+
+idata_pipe* ihttp_pipe_create(uv_loop_t *loop,
+                              ipipe_callback callback,
+                              struct icache_interface_for_pipe cache_interface,
                               idata_cache *cache,
                               const char *url,
+                              int index,
                               range rg,
                               void *user_data) {
+    ASSERT(rg.len!=0);
     ihttp_pipe *pipe = (ihttp_pipe*)malloc(sizeof(ihttp_pipe));
     memset(pipe, 0, sizeof(ihttp_pipe));
     pipe->ipipe.interface = &g_interface;
+    pipe->callback = callback;
+    pipe->cache_interface = cache_interface;
+    pipe->cache = cache;
+    pipe->user_data = user_data;
+    
+    pipe->want_rg = rg;
+    pipe->loop = loop;
+    pipe->index = index;
+    
+    start_connect_to(loop, pipe, url);
     return cast_to_ipipe(pipe);
 }

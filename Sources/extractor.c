@@ -15,13 +15,14 @@
 static QUEUE g_extractor_cache;
 static int g_extractor_init = 0;
 
-typedef struct {
+typedef struct extractor{
     http_retrieve *retrieve;
     extractor_result *result;
     extractor_complete_cb complete_cb;
     void *user_data;
 }extractor;
 
+/*
 static void parse_response_to_result2(char *buf, size_t len, extractor_result *result) {
     json_value *json_ret = json_parse(buf, len);
     ASSERT(json_ret && json_ret->type == json_object);
@@ -46,7 +47,8 @@ static void parse_response_to_result2(char *buf, size_t len, extractor_result *r
         }
     }
 }
-
+*/
+ 
 static void parse_response_to_result(char *buf, size_t len, extractor_result *result) {
     YOU_LOG_DEBUG("extractor_result:%p", result);
     json_value *json_ret = json_parse(buf, len);
@@ -77,6 +79,8 @@ static void parse_response_to_result(char *buf, size_t len, extractor_result *re
                         json_value *index_value = (json_value*)entry->u.object.values[z].value;
                         ASSERT(index_value->type == json_integer);
                         clip->index = (int)index_value->u.integer;
+                        ASSERT(clip->index > 0);
+                        clip->index -= 1;
                     }
                 }
             }
@@ -119,12 +123,14 @@ static void on_retrieve_complete(http_retrieve *retrieve, char *body, size_t bod
     extractor *ex = (extractor*)user_data;
     parse_response_to_result(body, body_len, ex->result);
     QUEUE_INSERT_TAIL(&g_extractor_cache, &ex->result->node);
-    ex->complete_cb(ex->result, ex->user_data);
+    if (ex->complete_cb) {
+        ex->complete_cb(ex->result, ex->user_data);
+        ex->complete_cb = NULL;
+    }
     ex->result->timer_handle.data = ex->result;
     uv_timer_start(&ex->result->timer_handle, on_timer_expire, 20*60*1000, 0);
     free_http_retrieve(retrieve);
 }
-
 
 static void init_extractor() {
     if (!g_extractor_init) {
@@ -147,7 +153,7 @@ extractor_result* find_extract_result(const char url[MAX_URL_LEN]) {
     return NULL;
 }
 
-void execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, extractor_complete_cb complete_cb, void *user_data) {
+extractor* execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, extractor_complete_cb complete_cb, void *user_data) {
     init_extractor();
     extractor *ex = (extractor*)malloc(sizeof(extractor));
     memset(ex, 0, sizeof(extractor));
@@ -165,5 +171,9 @@ void execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_me
 
     http_retrieve *retrieve = create_http_retrieve(loop, u, on_retrieve_complete, on_retrieve_error, ex);
     ex->retrieve = retrieve;
+    return ex;
 }
 
+void cancel_extractor(extractor *ex) {
+    ex->complete_cb = NULL;
+}

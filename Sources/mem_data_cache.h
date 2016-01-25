@@ -11,9 +11,7 @@
 
 #include "idata_cache.h"
 
-typedef struct uv_loop_t uv_loop_t;
-
-idata_cache* open_mem_cache(uv_loop_t *loop, const char *full_path, const char *url, void *user_data);
+idata_cache* open_mem_cache(icache_callback callback);
 
 
 #endif /* mem_data_cache_h */

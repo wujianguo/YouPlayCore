@@ -11,8 +11,6 @@
 
 #include "range.h"
 
-#define MEM_CACHE_BUF_SIZE_PER_CLIP (2*1024*1024)
-
 typedef struct idata_cache idata_cache;
 
 typedef struct {
@@ -30,6 +28,12 @@ int icache_write_data(idata_cache *cache, int index, range rg, const char *buf);
 int icache_set_clips_num(idata_cache *cache, int num);
 
 int icache_set_filesize(idata_cache *cache, int index, uint64_t filesize);
+
+uint64_t icache_get_filesize(idata_cache *cache, int index);
+
+int icache_downloaded_range(idata_cache *cache, int index, range *rg); // todo: change range to range_queue
+
+int icache_can_download_more(idata_cache *cache, int index, int *size);
 
 int icache_get_undownload_range_queue(idata_cache *cache, int index, range_queue *rgq);
 

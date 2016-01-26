@@ -29,6 +29,19 @@ int icache_set_filesize(idata_cache *cache, int index, uint64_t filesize) {
     return cache->interface->set_filesize(cache, index, filesize);
 }
 
+uint64_t icache_get_filesize(idata_cache *cache, int index) {
+    return cache->interface->get_filesize(cache, index);
+}
+
+int icache_downloaded_range(idata_cache *cache, int index, range *rg) {
+    // todo: change range to range_queue
+    return cache->interface->downloaded_range(cache, index, rg);
+}
+
+int icache_can_download_more(idata_cache *cache, int index, int *size) {
+    return cache->interface->can_download_more(cache, index, size);
+}
+
 int icache_get_undownload_range_queue(idata_cache *cache, int index, range_queue *rgq) {
     return cache->interface->get_undownload_range_queue(cache, index, rgq);
 }

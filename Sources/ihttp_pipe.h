@@ -21,7 +21,7 @@ idata_pipe* ihttp_pipe_create(uv_loop_t *loop,
                               idata_cache *cache,
                               const char *url,
                               int index,
-                              range rg,
+                              uint64_t start_pos,
                               void *user_data);
 
 #endif /* ihttp_pipe_h */

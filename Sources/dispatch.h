@@ -14,7 +14,7 @@
 
 typedef struct dispatch dispatch;
 
-dispatch* create_dispatch(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, data_cache *cache, struct idata_cache_interface interface);
+dispatch* create_dispatch(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, idata_cache *cache, struct icache_interface_for_dispatch interface);
 
 int dispatch_priority(dispatch *dis, int index, uint64_t pos);
 

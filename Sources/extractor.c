@@ -89,8 +89,7 @@ static void parse_response_to_result(char *buf, size_t len, extractor_result *re
     }
 }
 
-static void on_timer_expire(uv_timer_t *handle) {
-    extractor_result *result = (extractor_result*)handle->data;
+static void remove_extract_result(extractor_result *result) {
     QUEUE_REMOVE(&result->node);
     
     QUEUE *q = NULL;
@@ -112,6 +111,11 @@ static void on_timer_expire(uv_timer_t *handle) {
     
     free(result);
     // todo: free nodes
+}
+
+static void on_timer_expire(uv_timer_t *handle) {
+    extractor_result *result = (extractor_result*)handle->data;
+    remove_extract_result(result);
 }
 
 static void on_retrieve_error(http_retrieve *retrieve, int err_code, void *user_data) {
@@ -155,6 +159,18 @@ extractor_result* find_extract_result(const char url[MAX_URL_LEN]) {
 
 extractor* execute_extractor(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you_media_quality quality, extractor_complete_cb complete_cb, void *user_data) {
     init_extractor();
+    
+    QUEUE *q;
+    extractor_result *re;
+    QUEUE_FOREACH(q, &g_extractor_cache) {
+        re = QUEUE_DATA(q, extractor_result, node);
+        if (strcmp(re->url, url)==0) {
+            uv_timer_stop(&re->timer_handle);
+            remove_extract_result(re);
+            break;
+        }
+    }
+    
     extractor *ex = (extractor*)malloc(sizeof(extractor));
     memset(ex, 0, sizeof(extractor));
     ex->result = (extractor_result*)malloc(sizeof(extractor_result));

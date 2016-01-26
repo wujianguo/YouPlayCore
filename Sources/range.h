@@ -18,6 +18,7 @@ typedef struct {
 } range;
 
 #define RANGE_END(rg) ((rg).pos + (rg).len)
+#define RANGE_CONTAIN_POS(rg, p) ((rg).pos <= p && p < ((rg).pos + (rg).len))
 
 typedef struct {
     range rg;

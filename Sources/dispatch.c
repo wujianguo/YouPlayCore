@@ -93,7 +93,13 @@ static void dispatch_priority_index(dispatch *dis, dispatch_clip_node *node) {
     if (!node->pipe) {
         int size = 0;
         if (down.len == 0 || dis->cache_interface.can_download_more(dis->cache, node->index, &size)) {
-            struct icache_interface_for_pipe p_in; // todo: fill
+            struct icache_interface_for_pipe p_in = {
+                dis->cache_interface.set_filesize,
+                dis->cache_interface.get_filesize,
+                dis->cache_interface.write_data,
+                dis->cache_interface.downloaded_range,
+                dis->cache_interface.can_download_more
+            };
             node->pipe = ihttp_pipe_create(dis->loop, callback, p_in, dis->cache, node->url, node->index, RANGE_END(down), dis);
         }
     }
@@ -122,7 +128,13 @@ static void dispatch_normal_index(dispatch *dis, dispatch_clip_node *node) {
         return;
 
     ipipe_callback callback = {on_pipe_error, on_pipe_complete};
-    struct icache_interface_for_pipe p_in; // todo: fill
+    struct icache_interface_for_pipe p_in = {
+        dis->cache_interface.set_filesize,
+        dis->cache_interface.get_filesize,
+        dis->cache_interface.write_data,
+        dis->cache_interface.downloaded_range,
+        dis->cache_interface.can_download_more
+    };
     node->pipe = ihttp_pipe_create(dis->loop, callback, p_in, dis->cache, node->url, node->index, 0, dis);
 }
 
@@ -193,7 +205,7 @@ dispatch* create_dispatch(uv_loop_t *loop, const char url[MAX_URL_LEN], enum you
     uv_timer_init(loop, &dis->timer);
     uv_timer_start(&dis->timer, on_timer_expire, 2000, 1);
 
-    YOU_LOG_DEBUG("%p, quality: todo, url:%s", dis, url); //todo: quality str
+    YOU_LOG_DEBUG("%p, quality: %s, url:%s", dis, media_quality_str(dis->quality), url);
     return dis;
 }
 

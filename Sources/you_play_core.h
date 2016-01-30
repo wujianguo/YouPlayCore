@@ -9,7 +9,8 @@
 #ifndef you_play_core_h
 #define you_play_core_h
 
-#include "../http-server/http_server.h"
+
+typedef struct uv_loop_t uv_loop_t;
 
 void start_you_play_service_in_new_thread(unsigned short service_port,
                                           const char parser_script_url[1024],
@@ -35,7 +36,9 @@ enum you_media_quality {
     you_media_quality_default
 };
 
-int create_download_task(char *url, size_t url_len, enum you_media_quality quality, int *task_id);
+const char* media_quality_str(enum you_media_quality quality);
+
+int create_download_task(const char *url, enum you_media_quality quality, int *task_id);
 
 int resume_download_task(int task_id);
 

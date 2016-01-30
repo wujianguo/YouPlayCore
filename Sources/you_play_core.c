@@ -6,6 +6,7 @@
 //  Copyright © 2016年 wujianguo. All rights reserved.
 //
 
+#include "../http-server/http_server.h"
 #include "you_play_core.h"
 #include <stdlib.h>
 #include <pthread.h>
@@ -90,7 +91,7 @@ void start_you_play_service(unsigned short service_port,
 }
 
 
-int create_download_task(char *url, size_t url_len, enum you_media_quality quality, int *task_id) {
+int create_download_task(const char *url, enum you_media_quality quality, int *task_id) {
     return 0;
 }
 
@@ -106,3 +107,21 @@ int delete_download_task(int task_id) {
     return 0;
 }
 
+#ifndef ARRAY_SIZE
+# define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+#endif
+
+#ifndef ELEM_AT
+# define ELEM_AT(a, i, v) ((unsigned int) (i) < ARRAY_SIZE(a) ? (a)[(i)] : (v))
+#endif
+
+static const char *method_strings[] =
+{
+#define XX(num, name, string) #string,
+    YOU_MEDIA_QUALITY_MAP(XX)
+#undef XX
+};
+
+const char* media_quality_str(enum you_media_quality quality) {
+    return ELEM_AT(method_strings, quality, "default");
+}
